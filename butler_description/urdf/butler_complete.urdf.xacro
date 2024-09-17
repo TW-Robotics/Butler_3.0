@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<robot name="butler_3" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- === Include MIR100 === -->
+  <xacro:include filename="$(find mir_description)/urdf/include/mir_100_v1.urdf.xacro" />
+  <xacro:property name="mir_prefix" value="mir_" />
+  <xacro:mir_100 prefix="${mir_prefix}"/>
+  
+  <!-- === Include Butler Structure === -->
+  <xacro:include filename="$(find butler_description)/urdf/butler_structure.urdf.xacro" />
+  
+  <!-- === Include UR5 === -->
+  <xacro:include filename="$(find ur_description)/urdf/ur5.xacro" />
+  
+  <!-- === Include Robotiq Gripper 2F_85 === -->
+  <xacro:include filename="$(find gripper_2F_85_description)/urdf/gripper_halterung.xacro" />
+
+  <!-- Include D435 + args -->
+  <xacro:arg name="use_nominal_extrinsics" default="true"/>
+  <xacro:arg name="add_plug" default="true" />
+  <xacro:arg name="use_mesh" default="true" />
+  <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
+  
+  <link name="d435_base_link" />
+  <xacro:sensor_d435 parent="d435_base_link" use_nominal_extrinsics="$(arg use_nominal_extrinsics)" add_plug="$(arg add_plug)" use_mesh="$(arg use_mesh)">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:sensor_d435>
+
+
+  <!-- === Joints === -->
+  <!-- Fixed Joint for MiR100 to Butler Structure -->
+  <joint name="FixedJointMIRtoStructure" type="fixed">
+    <parent link="${mir_prefix}surface" />
+    <child link="butler_structure" />
+    <origin xyz="${0.756/2+0.005} ${-0.542/2} 0.0" rpy="0.0 0.0 0.0" />
+  </joint>
+
+  <!-- Fixed Joint for Butler Structure to UR5 -->
+  <joint name="FixedJointStructuretoUR5" type="fixed">
+    <origin xyz="-0.263 0.271 0.540" rpy="0.0 0.0 0.0" />
+    <parent link="butler_structure"/>
+    <child link="base_link"/> <!-- Ensure this is the correct name for the UR5 base link -->
+  </joint>
+
+  <!-- Fixed Joint for ur5 tool0 to fixture for d435--> 
+  <joint name="FixedLinkFixture" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 1.57079632679"/>
+    <parent link="tool0"/>
+    <child link="kamerahalterung"/>
+  </joint>
+  
+  <!-- Fixed Joint for fixture to d435 camera -->
+  <joint name="FixedLinkCamera" type="fixed">
+    <origin xyz="0.0125 0 0.01" rpy="0 -1.57079632679 0"/>
+    <parent link="Kamera_Basis_KS"/>
+    <child link="d435_base_link"/>
+  </joint>
+
+</robot>

@@ -1,0 +1,28 @@
+controller_list:
+  - name: fake_ur5_gripper_tcp_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - shoulder_pan_joint
+      - shoulder_lift_joint
+      - elbow_joint
+      - wrist_1_joint
+      - wrist_2_joint
+      - wrist_3_joint
+  - name: fake_ur5_gripper_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - finger_joint
+  - name: fake_ur5_rgbd_tcp_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - shoulder_pan_joint
+      - shoulder_lift_joint
+      - elbow_joint
+      - wrist_1_joint
+      - wrist_2_joint
+      - wrist_3_joint
+initial:  # Define initial robot poses per group
+  - group: ur5_gripper_tcp
+    pose: home_pose
+  - group: ur5_rgbd_tcp
+    pose: home_pose

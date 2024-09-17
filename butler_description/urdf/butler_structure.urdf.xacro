@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<robot name="butler_complete_structure" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- === Structure === -->
+  <link name="butler_structure">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://butler_description/meshes/body/visual/body.obj" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0.271 0.270" rpy="${-pi / 2} 0 ${-pi / 2}" />
+      <geometry>
+        <mesh filename="package://butler_description/meshes/body/collision/body.stl" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- === Logo === -->
+  <link name="cover_left">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://butler_description/meshes/body/visual/cover_left_with_logo.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://butler_description/meshes/body/visual/cover_left_with_logo.dae" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- joint logo cover with butler body -->
+  <joint name="cover_left_joint" type="fixed">
+    <origin xyz="${-0.75/2-0.003} ${0.542-0.003/2} ${0.540/2}" rpy="0 0 ${pi / 2}" />
+    <parent link="butler_structure" />
+    <child link="cover_left" />
+  </joint>
+
+  
+  <!-- === Gazebo === 
+  <xacro:include filename="$(find butler_description)/urdf/butler/butler.gazebo.xacro" />
+  <xacro:butler_gazebo prefix="${prefix}" robot_namespace="" />
+  -->
+</robot>

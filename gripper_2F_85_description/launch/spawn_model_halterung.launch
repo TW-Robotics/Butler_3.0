@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<launch>
+
+  <!-- Load robot description-->
+  <param name="robot_description" command="$(find xacro)/xacro $(find gripper_2F_85_description)/urdf/gripper_halterung.xacro" />  
+  
+  <!-- Spawn Joint State Publisher GUI-->
+  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+  
+  <!-- Spawn Robot State Publisher-->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+  <!-- Starting RViz with saved config-->
+  <arg name="rviz_config" value="-d $(find gripper_2F_85_description)/config/visualize.rviz" /> 
+  <node name="rviz" pkg="rviz" type="rviz" respawn="false" args="$(arg rviz_config)" output="screen"/>
+  
+</launch>

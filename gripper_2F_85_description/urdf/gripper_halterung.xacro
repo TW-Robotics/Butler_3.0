@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot name="gripper_2F_85" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find gripper_2F_85_description)/urdf/robotiq_arg2f_85_model_macro.xacro" />
+  <xacro:include filename="$(find gripper_2F_85_description)/urdf/halterung.urdf" />
+  <xacro:include filename="$(find gripper_2F_85_description)/urdf/flanschplatte.urdf" />
+  <xacro:robotiq_arg2f_85 prefix=""/>
+  
+  <link name="gripper_base"/>
+  <joint name="fixed_link_to_base" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <parent link="gripper_base"/>
+    <child link="robotiq_arg2f_base_link" />
+  </joint>
+  
+  <link name="gripper_tcp"/>
+  <joint name="fixed_link_to_tcp" type="fixed">
+    <origin rpy="0 0 -1.57079632679" xyz="0 0 0.16" />
+    <parent link="gripper_base"/>
+    <child link="gripper_tcp" />
+  </joint>
+  
+  <!-- Verbindung zwischen Halterung und Greifer -->
+  <joint name="fixed_link_to_fixture" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.012" />
+    <parent link="kamerahalterung"/>
+    <child link="flanschplatte" />
+  </joint> 
+  
+    <!-- Verbindung zwischen Flanschplatte und Greifer 3.14159265359-->
+  <joint name="fixed_link_to_flange" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.004" />
+    <parent link="flanschplatte"/>
+    <child link="gripper_base" />
+  </joint>   
+  
+</robot>

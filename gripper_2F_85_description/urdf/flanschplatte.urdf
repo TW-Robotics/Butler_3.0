@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<robot name="flansch">
+  <link name="flanschplatte">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh scale="0.001 0.001 0.001" filename="package://gripper_2F_85_description/meshes/visual/robotiq_gripper_coupling.stl" />
+      </geometry>
+      <material name="">
+        <color rgba="0.1 0.1 0.1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh scale="0.001 0.001 0.001" filename="package://gripper_2F_85_description/meshes/visual/robotiq_gripper_coupling.stl" />
+      </geometry>
+    </collision>
+  </link>  
+</robot>

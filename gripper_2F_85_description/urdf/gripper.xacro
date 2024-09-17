@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<robot name="gripper_2F_85" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find gripper_2F_85_description)/urdf/robotiq_arg2f_85_model_macro.xacro" />
+  <xacro:robotiq_arg2f_85 prefix=""/>
+  
+  <link name="gripper_base"/>
+  <joint name="fixed_link_to_base" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <parent link="gripper_base"/>
+    <child link="robotiq_arg2f_base_link" />
+  </joint>
+  
+  <link name="gripper_tcp"/>
+  <joint name="fixed_link_to_tcp" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.13" />
+    <parent link="gripper_base"/>
+    <child link="gripper_tcp" />
+  </joint>
+  
+</robot>

@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<launch>
+
+  <!-- Load robot description-->
+  <param name="robot_description" command="$(find xacro)/xacro $(find butler_description)/urdf/butler_complete.urdf.xacro" />  
+ 
+  <!-- Spawn Robot State Publisher-->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+  <!-- Starting RViz with saved config-->
+  <arg name="rviz_config" value="-d $(find butler_bringup)/config/moveit.rviz" /> 
+  <node name="rviz" pkg="rviz" type="rviz" respawn="false" args="$(arg rviz_config)" output="screen"/>
+  
+  <!-- Run MoveGroup for real robot (ur5/butler)-->
+  <include file="$(find butler_moveit)/launch/move_group.launch">
+    <arg name="allow_trajectory_execution" value="true"/>
+    <arg name="moveit_controller_manager" value="ur5" />
+    <arg name="fake_execution_type" value="false"/>
+    <arg name="info" value="true"/>
+    <arg name="debug" value="false"/>
+    <arg name="pipeline" value="ompl"/>
+    <arg name="load_robot_description" value="true"/>
+  </include>
+  
+  <!--RUN custom ur_driver--> 
+  <include file="$(find ur_robot_driver)/launch/ur5_bringup.launch">
+    <arg name="robot_ip" value="$(arg robot_ip)" />
+    <arg name="kinematics_config" value="$(find butler_bringup)/config/ur5.yaml" />
+    <arg name="headless_mode" default="true" />
+  </include>
+  
+  <!--Run gripper_node (optional)
+  <node name="gripper_node" pkg="gripper_2F_85_description" type="gripper_node.py" output="screen"/>-->  
+</launch>

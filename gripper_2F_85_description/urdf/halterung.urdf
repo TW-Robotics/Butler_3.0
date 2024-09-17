@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<robot name="halterung">
+
+  <link name="kamerahalterung">
+    <inertial>
+      <origin
+        xyz="-0.038021 7.5933E-19 0.0031873"
+        rpy="0 0 0" />
+      <mass
+        value="0.05" />
+      <inertia
+        ixx="1.9359E-05"
+        ixy="2.4161E-21"
+        ixz="-1.3664E-06"
+        iyy="8.4124E-05"
+        iyz="1.1107E-22"
+        izz="0.00010304" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gripper_2F_85_description/meshes/kamerahalterung.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.1 0.1 0.1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gripper_2F_85_description/meshes/kamerahalterung.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="Kamera_Basis_KS"/>
+  <joint name="fixed_link_to_Kamera" type="fixed">
+    <origin rpy="0 0 0" xyz="-0.0945 0 0.005" />
+    <parent link="kamerahalterung"/>
+    <child link="Kamera_Basis_KS"/>
+  </joint>
+  
+</robot>
