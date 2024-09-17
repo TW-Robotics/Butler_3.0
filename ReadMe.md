@@ -1,10 +1,10 @@
-# Butler_3.0 Package
+# Butler_3.0 Package (ROS Noetic)
 
-1. Clone the package from Github in your catkin workspace src folder
+1. Clone the package from Github in your catkin_ws/src folder
 
-2. go to you catkin_ws root folder and do `$rosdep install --from-paths src --ignore-src -r -y`
+2. Go to you catkin_ws root folder and do `$rosdep install --from-paths src --ignore-src -r -y`
 
-3. `$catkin_make`
+3. Do `$catkin_make`
 
 To launch the robot in rviz `$roslaunch butler_bringup butler_rviz.launch`
 
