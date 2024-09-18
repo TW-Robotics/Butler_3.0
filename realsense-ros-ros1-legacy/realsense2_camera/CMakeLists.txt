@@ -18,7 +18,7 @@ find_package(catkin REQUIRED COMPONENTS
     cv_bridge
     image_transport
     tf
-    dynamic_reconfigure
+    ddynamic_reconfigure
     diagnostic_updater
     )
 
