@@ -24,5 +24,7 @@ controller_list:
 initial:  # Define initial robot poses per group
   - group: ur5_gripper_tcp
     pose: home_pose
+  - group: ur5_gripper
+    pose: gripper_open
   - group: ur5_rgbd_tcp
     pose: home_pose
